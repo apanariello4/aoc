@@ -2,8 +2,9 @@ from collections import defaultdict
 import queue
 import re
 
-start_conf = []
-with open("input.txt") as f:
+
+def get_piles_and_moves(f):
+    start_conf = []
     data = f.readline()
     while not data.startswith(" 1"):
         x = data
@@ -12,16 +13,16 @@ with open("input.txt") as f:
 
         start_conf.append(x)
         data = f.readline()
+    n_bins = int(data.strip()[-1])
     _ = f.readline()
     moves = f.read().splitlines()
 
-x = defaultdict(list)
-for l in start_conf:
-    for i in range(10 - 1):
-        try:
+    x = defaultdict(list)
+    for l in start_conf:
+        for i in range(n_bins):
             x[i + 1].append(l[i])
-        except IndexError:
-            x[i + 1].append("*")
+
+    return x, moves
 
 
 class Pile:
@@ -52,21 +53,11 @@ class Pile:
             self.pile.put(s)
 
 
-x_og = x.copy()
-piles = {k: Pile(v) for k, v in x_og.items()}
-
-
 def move(piles, move):
     n, _from, to = map(int, re.findall(r"\d+", move))
 
     for _ in range(n):
         piles[to].push(piles[_from].pop())
-
-
-for m in moves:
-    move(piles, m)
-
-print("part 1:", ''.join([p.get_top() for p in piles.values()]))
 
 
 def move2(piles, move):
@@ -75,8 +66,18 @@ def move2(piles, move):
     piles[to].push_stack(piles[_from].pop_stack(n))
 
 
-piles = {k: Pile(v) for k, v in x_og.items()}
-for m in moves:
-    move2(piles, m)
+if __name__ == "__main__":
+    with open("input.txt") as f:
+        x, moves = get_piles_and_moves(f)
 
-print("part 2:", ''.join([p.get_top() for p in piles.values()]))
+    piles = {k: Pile(v) for k, v in x.items()}
+
+    for m in moves:
+        move(piles, m)
+
+    print("part 1:", ''.join([p.get_top() for p in piles.values()]))
+
+    piles = {k: Pile(v) for k, v in x.items()}
+    for m in moves:
+        move2(piles, m)
+    print("part 2:", ''.join([p.get_top() for p in piles.values()]))
