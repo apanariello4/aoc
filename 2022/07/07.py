@@ -2,24 +2,17 @@ from collections import defaultdict
 from pathlib import Path
 
 
-def make_index(data: str) -> dict[str, int]:
+def make_index(data: list[str]) -> dict[str, int]:
     index = {}
-    cwd = ""
+    cwd = Path()
     for l in data:
         if l.startswith("$ cd"):
             arg = l.split(" ")[2]
-            if arg == "..":
-                cwd = cwd.rsplit("/", 1)[0]
-            elif arg == '/':
-                cwd = arg
-            else:
-                cwd += "/" + arg if cwd != "/" else arg
-        else:
-            if not l.startswith("dir") and not l.startswith("$"):
-                size, name = l.split(" ")
-
-                file_path = cwd + "/" + name if cwd != "/" else "/" + name
-                index[file_path] = int(size)
+            cwd = cwd.parent if arg == ".." else cwd / arg
+        elif l[0].isdigit():
+            size, name = l.split(" ")
+            file_path = cwd / name
+            index[str(file_path)] = int(size)
     return index
 
 
