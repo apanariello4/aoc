@@ -1,4 +1,4 @@
-from pathlib import Path
+from utils import advent
 
 
 def find_start(string: str, header_len: int) -> int:
@@ -12,6 +12,9 @@ def find_start(string: str, header_len: int) -> int:
 
 
 if __name__ == '__main__':
-    string = Path('input.txt').read_text()
+    advent.setup(2022, 6)
+    with advent.get_input() as f:
+        string = f.read()
+
     print("part 1:", find_start(string, header_len=4))
     print("part 2:", find_start(string, header_len=14))

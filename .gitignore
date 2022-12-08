@@ -1,1 +1,4 @@
 .vscode
+utils/secret_session_cookie
+.mypy_cache
+*.pyc

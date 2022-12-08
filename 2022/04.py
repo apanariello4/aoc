@@ -1,4 +1,7 @@
-with open("./input.txt") as f:
+from utils import advent
+
+advent.setup(2022, 4)
+with advent.get_input() as f:
     lines = f.read().splitlines()
 
 tot = 0

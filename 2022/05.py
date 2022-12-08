@@ -1,6 +1,8 @@
-from collections import defaultdict
 import queue
 import re
+from collections import defaultdict
+
+from utils import advent
 
 
 def get_piles_and_moves(f):
@@ -67,7 +69,8 @@ def move2(piles, move):
 
 
 if __name__ == "__main__":
-    with open("input.txt") as f:
+    advent.setup(2022, 5)
+    with advent.get_input() as f:
         x, moves = get_piles_and_moves(f)
 
     piles = {k: Pile(v) for k, v in x.items()}

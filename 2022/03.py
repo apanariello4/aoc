@@ -1,3 +1,8 @@
+from utils import advent
+
+advent.setup(2022, 4)
+
+
 def get_value(char: str) -> int:
     return ord(char) - 96 if char.islower() else ord(char) - 38
 
@@ -19,7 +24,7 @@ def part2(lines: list[str]) -> int:
 
 
 if __name__ == '__main__':
-    with open('input.txt') as f:
+    with advent.get_input() as f:
         lines = f.read().splitlines()
     print('part 1:', part1(lines))
     print('part 2:', part2(lines))

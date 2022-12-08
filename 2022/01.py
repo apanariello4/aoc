@@ -1,3 +1,6 @@
+from utils import advent
+
+
 def main(data: list[str]) -> tuple[int, int]:
     sums = [sum([int(x) for x in chunk.split()]) for chunk in data]
     sums = sorted(sums, reverse=True)
@@ -5,7 +8,9 @@ def main(data: list[str]) -> tuple[int, int]:
 
 
 if __name__ == "__main__":
-    with open("./input.txt") as f:
+    advent.setup(2022, 1)
+
+    with advent.get_input() as f:
         data = f.read().split('\n\n')
 
     p1, p2 = main(data)

@@ -1,3 +1,6 @@
+from utils import advent
+
+
 def visibles_trees(data: list[list[int]]) -> int:
     H, W = len(data), len(data[0])
     n_visibles = (H - 1) * 2 + (W - 1) * 2  # perimeter
@@ -49,7 +52,8 @@ def scenic_score(data: list[list[int]]) -> int:
 
 
 if __name__ == "__main__":
-    with open("input.txt") as f:
+    advent.setup(2022, 8)
+    with advent.get_input(mode='rb') as f:
         data = f.read().splitlines()
     data = [[int(x) for x in line] for line in data]
 

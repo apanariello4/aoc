@@ -1,6 +1,8 @@
 from collections import defaultdict
 from pathlib import Path
 
+from utils import advent
+
 
 def make_index(data: list[str]) -> dict[str, int]:
     index = {}
@@ -26,8 +28,9 @@ def find_dirs_memory(index: dict) -> dict[str, int]:
 
 
 if __name__ == "__main__":
+    advent.setup(2022, 7)
 
-    with open("input.txt") as f:
+    with advent.get_input() as f:
         data = f.read().splitlines()
 
     index = make_index(data)

@@ -1,3 +1,5 @@
+from utils import advent
+
 COMB1 = {"A X": 1 + 3,
          "A Y": 2 + 6,
          "A Z": 3 + 0,
@@ -19,7 +21,8 @@ COMB2 = {"A X": 3 + 0,
          "C Z": 1 + 6, }
 
 if __name__ == "__main__":
-    with open("./input.txt") as f:
+    advent.setup(2022, 2)
+    with advent.get_input() as f:
         moves = f.read().splitlines()
 
     print("part 1: ", sum([COMB1[x] for x in moves]))
