@@ -1,7 +1,7 @@
 from utils import advent
 
 
-def visibles_trees(data: list[list[int]]) -> int:
+def visible_trees(data: list[list[int]]) -> int:
     H, W = len(data), len(data[0])
     n_visibles = (H - 1) * 2 + (W - 1) * 2  # perimeter
 
@@ -57,5 +57,5 @@ if __name__ == "__main__":
         data = f.read().splitlines()
     data = [[int(x) for x in line] for line in data]
 
-    print("Part 1:", visibles_trees(data))
+    print("Part 1:", visible_trees(data))
     print("Part 2:", scenic_score(data))

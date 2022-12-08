@@ -1,10 +1,10 @@
-from contextlib import suppress
 import os
-from pathlib import Path
-import sys
 import re
-from importlib import find_loader
+import sys
+from contextlib import suppress
 from datetime import datetime, timedelta
+from importlib import find_loader
+from pathlib import Path
 from time import sleep
 
 

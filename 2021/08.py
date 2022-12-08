@@ -1,18 +1,18 @@
-with open("input.txt") as f:
-    data = f.read().splitlines()
+from utils import advent
 
-data = [x.split(" | ") for x in data]
+advent.setup(2021, 8)
 
-known_len = (2, 4, 3, 7)
-known_len_dict = {2: 1, 4: 4, 3: 7, 7: 8}
+KNWON_LEN = (2, 4, 3, 7)
+KNOWN_LEN_MAPPING = {2: 1, 4: 4, 3: 7, 7: 8}
+
+
 def get_1_4_7_8(data):
     count = 0
     for row in data:
-        count += sum(l in known_len for l in map(len, row[1].split(" ")))
+        count += sum(l in KNWON_LEN for l in map(len, row[1].split(" ")))
 
     return count
 
-print("Part 1:",get_1_4_7_8(data))
 
 def get_combination(row):
 
@@ -23,8 +23,8 @@ def get_combination(row):
     digits = tuple(frozenset(d) for d in digits.split())
 
     for p in patterns:
-        if len(p) in known_len:
-            p2d[p] = known_len_dict[len(p)]
+        if len(p) in KNWON_LEN:
+            p2d[p] = KNOWN_LEN_MAPPING[len(p)]
 
     d2p = {v: k for k, v in p2d.items()}
     # 0 -> len 6,
@@ -35,7 +35,7 @@ def get_combination(row):
     # 9 -> len 6
 
     for p in patterns:
-        if len(p) not in known_len:
+        if len(p) not in KNWON_LEN:
 
             if len(p) == 5:
                 # 2, 3, 5
@@ -60,6 +60,7 @@ def get_combination(row):
 
     return total
 
+
 def tot(data):
     count = 0
     for row in data:
@@ -67,4 +68,11 @@ def tot(data):
     return count
 
 
-print("Part 2:", tot(data))
+if __name__ == "__main__":
+    with advent.get_input() as f:
+        data = f.read().splitlines()
+
+    data = [x.split(" | ") for x in data]
+
+    advent.print_answer(1, get_1_4_7_8(data))
+    advent.print_answer(2, tot(data))
