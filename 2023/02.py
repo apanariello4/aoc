@@ -15,6 +15,50 @@ max_blue = 14
 max_green = 13
 
 
+def p1(data: list[str]) -> int:
+    all_ids_sum = 0
+    for line in data:
+        id_ = line.split(':')[0].split()[1]
+        games = line.split(':')[1].split(';')
+        for i, game in enumerate(games):
+            game = game.strip()
+
+            green = int(re.search(r'(\d+) green', game).group(1)) if 'green' in game else 1
+            blue = int(re.search(r'(\d+) blue', game).group(1)) if 'blue' in game else 1
+            red = int(re.search(r'(\d+) red', game).group(1)) if 'red' in game else 1
+
+            if red > max_red or blue > max_blue or green > max_green:
+                # print(f'{id_} is not valid')
+                break
+            if i == len(games) - 1:
+                # print(f'{id_} is valid')
+                all_ids_sum += int(id_)
+    return all_ids_sum
+
+
+def p2(data: list[str]) -> int:
+    all_ids_sum = 0
+    for line in data:
+        id_ = line.split(':')[0].split()[1]
+        games = line.split(':')[1].split(';')
+        min_green, min_blue, min_red = 0, 0, 0
+        cur_min_green, cur_min_blue, cur_min_red = 0, 0, 0
+        for i, game in enumerate(games):
+            game = game.strip()
+
+            green = int(re.search(r'(\d+) green', game).group(1)) if 'green' in game else 0
+            blue = int(re.search(r'(\d+) blue', game).group(1)) if 'blue' in game else 0
+            red = int(re.search(r'(\d+) red', game).group(1)) if 'red' in game else 0
+
+            cur_min_green = max(cur_min_green, green)
+            cur_min_blue = max(cur_min_blue, blue)
+            cur_min_red = max(cur_min_red, red)
+            if i == len(games) - 1:
+
+                all_ids_sum += cur_min_green * cur_min_blue * cur_min_red
+    return all_ids_sum
+
+
 def solve(data: list[str]) -> tuple[int, int]:
     p1_sol = p2_sol = 0
     for id_, line in enumerate(data, 1):
