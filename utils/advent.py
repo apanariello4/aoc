@@ -45,11 +45,13 @@ def check_setup_once():
         setup(y, d)
 
 
-def setup(year, day):
+def setup(year, day=None):
     global YEAR
     global DAY
     global SESSION
 
+    if not day:
+        day = int(sys.argv[0].split('/')[-1].split('.')[0])
     if not (year >= 2015 and 1 <= day <= 25):
         log('ERROR: invalid year and/or day set!\n')
         sys.exit(1)
