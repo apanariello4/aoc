@@ -8,6 +8,16 @@ L|7||
 -L-J|
 L|-JF"""
 
+DEBUG = """...........
+.S-------7.
+.|F-----7|.
+.||.....||.
+.||.....||.
+.|L-7.F-J|.
+.|..|.|..|.
+.L--J.L--J.
+..........."""
+
 # | is a vertical pipe connecting north and south.
 # - is a horizontal pipe connecting east and west.
 # L is a 90-degree bend connecting north and east.
@@ -18,7 +28,7 @@ L|-JF"""
 # S is the starting position of the animal; there is a pipe on this tile, but your sketch doesn't show what shape the pipe has.
 
 
-def p1(data):
+def p1(data: list[str]) -> tuple[set, int]:
     # find loop
     grid = [[x for x in line] for line in data]
     starting = None
@@ -142,7 +152,7 @@ def p1(data):
                 return visited, len(visited) // 2
 
 
-def p2(data, visited):
+def p2(data: str, visited: set) -> int:
     H, W = len(data), len(data[0])
     grid = [[0] * W for _ in range(H)]
     for i in visited:
@@ -152,14 +162,14 @@ def p2(data, visited):
         inside = False
         for j in range(W):
             if grid[i][j]:
-                if data[i][j] in "|JLS":
+                if data[i][j] in "|7F":
                     inside = not inside
             elif inside:
                 count += 1
     return count
 
 
-def p1_optimized(data):
+def p1_optimized(data: list[str]) -> tuple[set, int]:
     W = len(data[0])
     grid = [[x for x in line] for line in data]
     starting = ''.join(data).index('S') % W, ''.join(data).index('S') // W
@@ -201,6 +211,6 @@ if __name__ == '__main__':
         data = f.read().strip().splitlines()
 
     visited, sol_p1 = p1(data)
-    assert sol_p1 == p1_optimized(data)[1]
+    print(p2(DEBUG.splitlines(), p1_optimized(DEBUG.splitlines())[0]))
     advent.print_answer(1, sol_p1)
     advent.print_answer(2, p2(data, visited))

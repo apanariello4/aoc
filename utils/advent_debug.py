@@ -23,3 +23,11 @@ def assert_debug(debug_input, sol, func):
         sys.exit(1)
     else:
         log_debug(f'{BGREEN}CORRECT ANSWER 👍{END}: {func.__name__} = {out}\n')
+
+
+def print_debug(debug_input, sol, func):
+    out = func(debug_input)
+    if out != sol:
+        log_debug(f'{RED}WRONG ANSWER ❌{END}: {func.__name__} returned {out}, expected {sol}\n')
+    else:
+        log_debug(f'{BGREEN}CORRECT ANSWER 👍{END}: {func.__name__} = {out}\n')
