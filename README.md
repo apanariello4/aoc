@@ -1,6 +1,8 @@
 # Advent of Code Solutions
 
 This repository contains my solutions to the [Advent of Code](https://adventofcode.com/) puzzles.
+From 2023 onwards, I'm pushing original solutions used to submit the results under the functions named p1 and p2.
+If some optimization is possible (almost always) I'll upload the optimized solutions along with the original ones.
 
 The helper module `utils/advent.py` is from [mebeim's repo](https://github.com/mebeim/aoc)
 
