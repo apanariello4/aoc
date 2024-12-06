@@ -16,8 +16,8 @@ def log_debug(s, *a):
     log(f'{BYELLOW}[DEBUG]{END} ' + s.format(*a))
 
 
-def assert_debug(debug_input, sol, func):
-    out = func(debug_input)
+def assert_debug(debug_input, sol, func, **kwargs):
+    out = func(debug_input, **kwargs)
     if out != sol:
         log_debug(f'{RED}WRONG ANSWER ❌{END}: {func.__name__} returned {out}, expected {sol}\n')
         sys.exit(1)
@@ -25,8 +25,8 @@ def assert_debug(debug_input, sol, func):
         log_debug(f'{BGREEN}CORRECT ANSWER 👍{END}: {func.__name__} = {out}\n')
 
 
-def print_debug(debug_input, sol, func):
-    out = func(debug_input)
+def print_debug(debug_input, sol, func, **kwargs):
+    out = func(debug_input, **kwargs)
     if out != sol:
         log_debug(f'{RED}WRONG ANSWER ❌{END}: {func.__name__} returned {out}, expected {sol}\n')
     else:
