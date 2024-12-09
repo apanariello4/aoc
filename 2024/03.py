@@ -1,3 +1,5 @@
+import re
+
 from utils import advent
 from utils.advent_debug import print_debug
 
@@ -11,7 +13,6 @@ def parse(data):
     return data
 
 
-import re
 pattern = re.compile(r'mul\((\d+),(\d+)\)')
 def p1(data):
     return sum(int(a) * int(b) for a, b in pattern.findall(data))
