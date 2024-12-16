@@ -18,16 +18,18 @@ def log_debug(s, *a):
 
 def assert_debug(debug_input, sol, func, **kwargs):
     out = func(debug_input, **kwargs)
+    func_name = func.__name__ if hasattr(func, '__name__') else func.func.__name__
     if out != sol:
-        log_debug(f'{RED}WRONG ANSWER ❌{END}: {func.__name__} returned {out}, expected {sol}\n')
+        log_debug(f'{RED}WRONG ANSWER ❌{END}: {func_name} returned {out}, expected {sol}\n')
         sys.exit(1)
     else:
-        log_debug(f'{BGREEN}CORRECT ANSWER 👍{END}: {func.__name__} = {out}\n')
+        log_debug(f'{BGREEN}CORRECT ANSWER 👍{END}: {func_name} = {out}\n')
 
 
 def print_debug(debug_input, sol, func, **kwargs):
     out = func(debug_input, **kwargs)
+    func_name = func.__name__ if hasattr(func, '__name__') else func.func.__name__
     if out != sol:
-        log_debug(f'{RED}WRONG ANSWER ❌{END}: {func.__name__} returned {out}, expected {sol}\n')
+        log_debug(f'{RED}WRONG ANSWER ❌{END}: {func_name} returned {out}, expected {sol}\n')
     else:
-        log_debug(f'{BGREEN}CORRECT ANSWER 👍{END}: {func.__name__} = {out}\n')
+        log_debug(f'{BGREEN}CORRECT ANSWER 👍{END}: {func_name} = {out}\n')
